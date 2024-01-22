@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{Title}</title>
+    <link rel="shortcut icon" href="{Favicon}">
+    <link rel="alternate" type="application/rss+xml" href="{RSS}">
+    {block:Description}
+    <meta name="description" content="{MetaDescription}" />
+    {/block:Description}
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Style -->
+    <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            transition: all ease 0.3s;
+            font-family: 'Inter', 'Roboto', sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: start;
+        }
+
+        @media screen and (min-width: 1000px) {
+            .row {
+                flex-wrap: nowrap;
+            }
+        }
+
+        .row [class^='col'] {
+            width: 100%;
+        }
+
+        @media screen and (min-width: 1000px) {
+            .row .col {
+                width: 100%;
+            }
+
+            .row .col-1 {
+                width: 8.33%;
+            }
+
+            .row .col-2 {
+                width: 16.66%;
+            }
+
+            .row .col-3 {
+                width: 25%;
+            }
+
+            .row .col-4 {
+                width: 33.33%;
+            }
+
+            .row .col-5 {
+                width: 41.66%;
+            }
+
+            .row .col-6 {
+                width: 50%;
+            }
+
+            .row .col-7 {
+                width: 58.33%;
+            }
+
+            .row .col-8 {
+                width: 66.66%;
+            }
+
+            .row .col-9 {
+                width: 75%;
+            }
+
+            .row .col-10 {
+                width: 83.33%;
+            }
+
+            .row .col-11 {
+                width: 91.66%;
+            }
+
+            .row .col-12 {
+                width: 100%;
+            }
+        }
+
+        .desktop-only {
+            display: block;
+        }
+
+        @media only screen and (max-width: 1000px) {
+            .desktop-only {
+                display: none !important;
+            }
+        }
+
+        .mobile-only {
+            display: block;
+        }
+
+        @media only screen and (min-width: 1000px) {
+            .mobile-only {
+                display: none !important;
+            }
+        }
+
+        /* ==================== Main Style ==================== */
+
+        * {
+            --border-radius: 8px;
+        }
+
+        #tumblr-main-wrap {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: center;
+        }
+
+        #tumblr-main-wrap #tumblr-main {
+            /* Max photo size in the Tumblr NPF */
+            max-width: 500px;
+        }
+
+        #posts {
+            border: dashed 2px blue;
+        }
+
+        #posts .post {
+            border: dashed 2px gray;
+            margin: 2rem;
+            padding: 1rem;
+        }
+
+        #posts .post .content {
+            border: dashed 1px gray;
+            padding: 1rem;
+        }
+
+        /* Youtube, Embbed Content,... */
+        #posts .post .content iframe {
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            height: 100%;
+            border-radius: var(--border-radius);
+        }
+
+        /* Images */
+        #posts .post .content img {
+            width: 100%;
+            border-radius: var(--border-radius);
+        }
+
+        /* Quotes */
+        #posts .post .content .npf_quote::before,
+        #posts .post .content .npf_quote::after {
+            content: "\"";
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tumblr-main-wrap">
+        <div id="tumblr-main">
+            <a href="{BlogURL}">
+                <h1>{Title}</h1>
+            </a>
+            {block:Description}<h2 id="description">{Description}</h2>{/block:Description}
+            <!-- ==================== Posts ==================== -->
+            <div id="posts">
+                {block:Posts}
+                <div class="post">
+                    <h3 class="title">{Title}</h3>
+                    <a class="link" href="{Permalink}">View details</a>
+                    <div class="content">
+                        {Body}
+                    </div>
+                    <div class="date">
+                        {Timestamp},
+                        {TimeAgo},
+                        {block:Date}
+                        {ShortMonth}
+                        {DayOfMonth}{DayOfMonthSuffix}
+                        {Year}
+                        {/block:Date}
+                    </div>
+                    <div class="tags">
+                        {block:HasTags}
+                        {block:Tags}
+                        <a href="{TagURL}">#{Tag}</a>
+                        {/block:Tags}
+                        {/block:HasTags}
+                    </div>
+                </div>
+                {/block:Posts}
+            </div>
+            <!-- ==================== Footer ==================== -->
+            <div id="footer">
+                <!-- ---------- Navigation ---------- -->
+                {block:PreviousPage}
+                <a href="{PreviousPage}">
+                    ⏮️ PREV PAGE
+                </a>
+                {/block:PreviousPage}
+                {block:NextPage}
+                <a href="{NextPage}">
+                    ⏭️ NEXT PAGE
+                </a>
+                {/block:NextPage}
+                <!-- ---------- Archive ---------- -->
+                <a href="/archive">📁 ARCHIVE</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
